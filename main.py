@@ -37,9 +37,13 @@ MODEL_NAME = "gemini-3.1-flash-lite"
 # Pydantic Schemas 
 # ===========================================================================
 
-class transaksiData(BaseModel):
+class TransaksiData(BaseModel):
     kategori: str
     nominal: float = Field(gt=0)
     tipe: Literal["pemasukan", "pengeluaran"]
     deskripsi: str = ""
-    
+
+class ReminderData(BaseModel):
+    judul: str
+    tanggal: str
+    deskripsi: str = ""
