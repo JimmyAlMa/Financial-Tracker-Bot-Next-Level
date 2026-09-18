@@ -20,3 +20,12 @@ TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GOOGLE_SHEET_NAME = "Jimmy's Financial logs"
 SERVICE_ACCOUNT_FILE = "service_account.json"
+
+logging.basicConfig(
+    level=logging.INFO,
+    filename="app.log",
+    filemode='a',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
+
