@@ -51,3 +51,39 @@ class ReminderData(BaseModel):
 class RekapParams(BaseModel):
     bulan: Optional[int] = Field(default=None, ge=1, le=12)
     tahun: Optional[int] = Field(default=None, ge=2000, le=2100)
+
+
+# ===========================================================================
+# Function Declarations
+# ===========================================================================
+
+SIMPAN_TRANSAKSI_FUNC = {
+    "name": "simpan_transaksi",
+    "description": (
+        "Simpan transaksi keuangan (pemasukan atau pengeluaran) ke pencatatan. "
+        "Gunakan ini kalau user cerita soal beli sesuatu, bayar sesuatu, dapat uang, gajian, dst."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "kategori": {
+                "type": "string",
+                "description": "Kategori transaksi, misal: makanan, transport, gaji, belanja",
+            },
+            "nominal": {
+                "type": "number",
+                "description": "Jumlah uang dalam Rupiah, angka positif murni (contoh: '25rb' jadi 25000)",
+            },
+            "tipe": {
+                "type": "string",
+                "enum": ["pemasukan", "pengeluaran"],
+                "description": "Apakah ini uang masuk atau keluar",
+            },
+            "deskripsi": {
+                "type": "string",
+                "description": "Deskripsi singkat transaksi",
+            },
+        },
+        "required": ["kategori", "nominal", "tipe"],
+    },
+}
