@@ -47,3 +47,7 @@ class ReminderData(BaseModel):
     judul: str
     tanggal: str
     deskripsi: str = ""
+
+class RekapParams(BaseModel):
+    bulan: Optional[int] = Field(default=None, ge=1, le=12)
+    tahun: Optional[int] = Field(default=None, ge=2000, le=2100)
