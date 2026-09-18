@@ -116,3 +116,25 @@ BUAT_REMINDER_FUNC = {
         "required": ["judul", "tanggal"],
     },
 }
+
+REKAP_BULANAN_FUNC = {
+    "name": "rekap_bulanan",
+    "description": (
+        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran bulanan. "
+        "Gunakan ini kalau user minta rekap, laporan, atau ringkasan keuangan."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "bulan": {
+                "type": "integer",
+                "description": "Bulan yang mau direkap (1-12). Kosongkan kalau user tidak sebut.",
+            },
+            "tahun": {
+                "type": "integer",
+                "description": "Tahun yang mau direkap. Kosongkan kalau user tidak sebut.",
+            },
+        },
+        "required": [],
+    },
+}
