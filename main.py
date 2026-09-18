@@ -32,3 +32,14 @@ logger = logging.getLogger(__name__)
 client = genai.Client(api_key=GEMINI_API_KEY)
 MODEL_NAME = "gemini-3.1-flash-lite"
 
+
+# ===========================================================================
+# Pydantic Schemas 
+# ===========================================================================
+
+class transaksiData(BaseModel):
+    kategori: str
+    nominal: float = Field(gt=0)
+    tipe: Literal["pemasukan", "pengeluaran"]
+    deskripsi: str = ""
+    
