@@ -87,3 +87,32 @@ SIMPAN_TRANSAKSI_FUNC = {
         "required": ["kategori", "nominal", "tipe"],
     },
 }
+
+BUAT_REMINDER_FUNC = {
+    "name": "buat_reminder",
+    "description": (
+        "Buat pengingat/reminder untuk user. Gunakan ini kalau user minta diingetin "
+        "sesuatu di tanggal tertentu, misal bayar tagihan."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "judul": {
+                "type": "string",
+                "description": "Judul singkat reminder",
+            },
+            "tanggal": {
+                "type": "string",
+                "description": (
+                    "Tanggal reminder format YYYY-MM-DD. Kalau user sebut relatif "
+                    "(besok, minggu depan), hitung tanggal aslinya berdasarkan hari ini."
+                ),
+            },
+            "deskripsi": {
+                "type": "string",
+                "description": "Detail tambahan reminder",
+            },
+        },
+        "required": ["judul", "tanggal"],
+    },
+}
