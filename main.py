@@ -138,3 +138,12 @@ REKAP_BULANAN_FUNC = {
         "required": [],
     },
 }
+
+PESAN_TIDAK_DIKENALI_FUNC = {
+    "name": "pesan_tidak_dikenali",
+    "description": (
+        "Gunakan ini kalau pesan user TIDAK berkaitan dengan pencatatan transaksi, "
+        "reminder, atau permintaan rekap keuangan."
+    ),
+    "parameters": {"type": "object", "properties": {}, "required": []},
+}
