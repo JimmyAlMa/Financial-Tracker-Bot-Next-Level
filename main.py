@@ -238,3 +238,26 @@ def save_remider(data: ReminderData):
             data.judul,
             data.deskripsi,
     ])
+
+
+# ===========================================================================
+# Function Handler
+# ===========================================================================
+
+def handle_simpan_transaksi(args: dict) -> str:
+    try:
+        data = TransaksiData(args**)
+    except ValidationError as e:
+        logger.warning(f"Validasi transaksi gagal: {e}")
+        return (
+            "Data transaksinya kurang lengkap atau formatnya aneh. "
+            "Coba tulis ulang, misalnya: 'makan siang 25rb'"
+        )
+
+    save_transaksi(data)
+    return (
+        f"Tercatat ({data.tipe})\n"
+        f"Kategori: {data.kategori}\n"
+        f"Nominal: Rp{data.nominal:,.0f}\n"
+        f"Deskripsi: {data.deskripsi or '-'}"
+    )
