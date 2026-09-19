@@ -261,3 +261,18 @@ def handle_simpan_transaksi(args: dict) -> str:
         f"Nominal: Rp{data.nominal:,.0f}\n"
         f"Deskripsi: {data.deskripsi or '-'}"
     )
+
+def handle_buat_reminder(args: dict) -> str:
+    try:
+        data = ReminderData(**args)
+    except ValidationError as e:
+        logger.warning(f"Validasi reminder gagal: {e}")
+        return "Detail reminder-nya kurang lengkap, coba sebutkan lagi judul dan tanggalnya."
+
+    save_reminder(data)
+    return (
+        f"Reminder dibuat\n"
+        f"Judul: {data.judul}\n"
+        f"Tanggal: {data.tanggal}\n"
+        f"Catatan: {data.deskripsi or '-'}"
+    )
