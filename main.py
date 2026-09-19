@@ -147,3 +147,12 @@ PESAN_TIDAK_DIKENALI_FUNC = {
     ),
     "parameters": {"type": "object", "properties": {}, "required": []},
 }
+
+FINANCE_TOOL = types.Tool(
+    function_declarations=[
+        SIMPAN_TRANSAKSI_FUNC,
+        BUAT_REMINDER_FUNC,
+        REKAP_BULANAN_FUNC,
+        PESAN_TIDAK_DIKENALI_FUNC,
+    ]
+)
