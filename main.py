@@ -156,3 +156,17 @@ FINANCE_TOOL = types.Tool(
         PESAN_TIDAK_DIKENALI_FUNC,
     ]
 )
+
+def build_system_prompt() -> str:
+    today = datetime.now().strftime("%Y-%m-%d (%A)")
+    return (
+        "Kamu adalah asisten pencatat keuangan pribadi di Telegram.\n"
+        "Setiap pesan user WAJIB direspons dengan memanggil SALAH SATU function yang tersedia:\n"
+        "- simpan_transaksi: user cerita soal pengeluaran atau pemasukan uang\n"
+        "- buat_reminder: user minta diingetin sesuatu\n"
+        "- rekap_bulanan: user minta ringkasan/laporan keuangan\n"
+        "- pesan_tidak_dikenali: pesan tidak berkaitan dengan ketiga hal di atas\n\n"
+        "Untuk nominal uang, selalu ubah ke angka murni (contoh: '25rb' -> 25000, '1jt' -> 1000000).\n"
+        f"Hari ini tanggal: {today}. Gunakan ini untuk menghitung tanggal reminder relatif "
+        "(besok, minggu depan, dst)."
+    )
