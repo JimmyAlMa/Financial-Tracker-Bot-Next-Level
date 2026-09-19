@@ -199,3 +199,23 @@ def call_gemini(message_text: str, maximal_attempt: int = 3) -> tuple[str, dict]
                 time.sleep(2 * maximal_attempt)
                 continue
             raise
+
+
+# ===========================================================================
+# Google Sheets Helper
+# ===========================================================================
+
+def get_sheet(worksheet_name: str):
+    scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.readonly",
+    ]
+
+    creds_json_str = os.environ.get("GOOGLE_CREDS_JSON")
+    if creds_json_str:
+        creds_dict = json.loads(creds_json_str)
+        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+    else:
+        creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=scopes)
+    gs_client = gspread.authorize(creds)
+    return gs_client.open(GOOGLE_SHEET_NAME).worksheet(worksheet_name)
