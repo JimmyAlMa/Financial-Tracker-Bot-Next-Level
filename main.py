@@ -170,3 +170,32 @@ def build_system_prompt() -> str:
         f"Hari ini tanggal: {today}. Gunakan ini untuk menghitung tanggal reminder relatif "
         "(besok, minggu depan, dst)."
     )
+
+def call_gemini(message_text: str, maximal_attempt: int = 3) -> tuple[str, dict]:
+    config = types.GenerateContentConfig(
+        system_instruction=build_system_prompt(),
+        tools=FINANCE_TOOL,
+        tool_config=types.ToolConfig(
+            function_calling_config=types.FunctionCallingConfig(mode="ANY")
+        )
+    )
+
+    for attempt in range(1, maximal_attempt + 1):
+        try:
+            response = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=message_text,
+                config=config
+            )
+
+            part = response.candidates[0].content.parts[0]
+            if not part.function_call:
+                raise ValueError("Gemini tidak memanggil function apapun")
+
+            return part.function_call.name, dict(part.function_call.args)
+        except Exception as e:
+            if "503" in str(e) and attempt < maximal_attempt:
+                logger.warning(f"Gemini sedang sibuk, coba lagi ({attempt}/{maximal_attempt})...")
+                time.sleep(2 * maximal_attempt)
+                continue
+            raise
