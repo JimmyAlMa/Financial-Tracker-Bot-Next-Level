@@ -219,3 +219,13 @@ def get_sheet(worksheet_name: str):
         creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=scopes)
     gs_client = gspread.authorize(creds)
     return gs_client.open(GOOGLE_SHEET_NAME).worksheet(worksheet_name)
+
+def save_transaksi(data: TransaksiData):
+    sheet = get_sheet("Sheet1")
+    sheet.append_row([
+        datetime.now().strftime("%Y-%m-%d %H:%M"),
+            data.tipe,
+            data.kategori,
+            data.nominal,
+            data.deskripsi,
+    ])
