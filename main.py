@@ -246,7 +246,7 @@ def save_remider(data: ReminderData):
 
 def handle_simpan_transaksi(args: dict) -> str:
     try:
-        data = TransaksiData(args**)
+        data = TransaksiData(**args)
     except ValidationError as e:
         logger.warning(f"Validasi transaksi gagal: {e}")
         return (
@@ -275,4 +275,62 @@ def handle_buat_reminder(args: dict) -> str:
         f"Judul: {data.judul}\n"
         f"Tanggal: {data.tanggal}\n"
         f"Catatan: {data.deskripsi or '-'}"
+    )
+
+def handle_rekap_bulanan(args: dict) -> str:
+    try:
+        params = RekapParams(**args)
+    except ValidationError as e:
+        logger.warning(f"Parameter rekap tidak valid: {e}")
+        return "Bulan/tahun yang diminta nggak valid."
+
+    now = datetime.now()
+    bulan = params.bulan or now.month
+    tahun = params.tahun or now.year
+
+    sheet = get_sheet("Sheet1")
+    rows = sheet.get_all_values()
+
+    total_pemasukan = 0.0
+    jumlah_pemasukan = 0
+    total_pengeluaran = 0.0
+    jumlah_pengeluaran = 0
+    jumlah_transaksi = 0
+
+    for row in rows:
+        if len(row) < 5:
+            continue
+
+        try:
+            ts = datetime.strptime(row[0], "%Y-%m-%d %H:%M")
+        except ValueError:
+            continue
+
+        if ts.month != bulan or ts.year != tahun:
+            continue
+
+        tipe, nominal_str = row[1], row[3]
+
+        try:
+            nominal = float(nominal_str)
+        except ValueError:
+            continue
+
+        jumlah_transaksi += 1
+        if tipe == "pemasukan":
+            jumlah_pemasukan += 1
+            total_pemasukan += nominal
+        else:
+            jumlah_pengeluaran += 1
+            total_pengeluaran += nominal
+
+    selisih = total_pemasukan - total_pengeluaran
+    return (
+        f"Rekap {bulan:02d}/{tahun}\n"
+        f"Jumlah transaksi: {jumlah_transaksi}\n"
+        f"Jumlah pemasukan: {jumlah_pemasukan}\n"
+        f"Jumlah pengeluaran: {jumlah_pengeluaran}\n"
+        f"Pemasukan: Rp{total_pemasukan:,.0f}\n"
+        f"Pengeluaran: Rp{total_pengeluaran:,.0f}\n"
+        f"Selisih: Rp{selisih:,.0f}"
     )
