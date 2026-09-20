@@ -371,3 +371,24 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         logger.error(f"Error: {e}")
         await update.message.reply_text(f"Error: {e}")
+
+def main():
+    app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+
+    port = int(os.environ.get("PORT", 8443))
+
+    external_url = os.environ.get("RENDER_EXTERNAL_URL")
+
+    webhook_url = f"{external_url}/{TELEGRAM_BOT_TOKEN}"
+
+    logger.info(f"Menjalankan bot via webhook: {webhook_url}")
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=port,
+        url_path=TELEGRAM_BOT_TOKEN,
+        webhook_url=webhook_url
+    )
+
+if __name__ == "__main__":
+    main()
