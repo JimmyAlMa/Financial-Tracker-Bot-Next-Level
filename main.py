@@ -334,3 +334,9 @@ def handle_rekap_bulanan(args: dict) -> str:
         f"Pengeluaran: Rp{total_pengeluaran:,.0f}\n"
         f"Selisih: Rp{selisih:,.0f}"
     )
+
+def handle_pesan_tidak_dikenali(args: dict) -> str:
+    return (
+        "Maaf, aku cuma bisa bantu catat transaksi, bikin reminder, atau rekap bulanan. "
+        "Coba tulis ulang, misalnya: 'makan siang 25rb' atau 'rekap bulan ini'"
+    )
