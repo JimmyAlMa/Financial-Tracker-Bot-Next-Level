@@ -174,7 +174,7 @@ def build_system_prompt() -> str:
 def call_gemini(message_text: str, maximal_attempt: int = 3) -> tuple[str, dict]:
     config = types.GenerateContentConfig(
         system_instruction=build_system_prompt(),
-        tools=FINANCE_TOOL,
+        tools=[FINANCE_TOOL],
         tool_config=types.ToolConfig(
             function_calling_config=types.FunctionCallingConfig(mode="ANY")
         )
