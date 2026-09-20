@@ -230,7 +230,7 @@ def save_transaksi(data: TransaksiData):
             data.deskripsi,
     ])
 
-def save_remider(data: ReminderData):
+def save_reminder(data: ReminderData):
     sheet = get_sheet("Reminders")
     sheet.append_row([
         datetime.now().strftime("%Y-%m-%d %H:%M"),
