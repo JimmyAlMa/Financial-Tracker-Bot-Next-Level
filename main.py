@@ -340,3 +340,10 @@ def handle_pesan_tidak_dikenali(args: dict) -> str:
         "Maaf, aku cuma bisa bantu catat transaksi, bikin reminder, atau rekap bulanan. "
         "Coba tulis ulang, misalnya: 'makan siang 25rb' atau 'rekap bulan ini'"
     )
+
+FUNCTION_HANDLERS = {
+    "simpan_transaksi": handle_simpan_transaksi,
+    "buat_reminder": handle_buat_reminder,
+    "rekap_bulanan": handle_rekap_bulanan,
+    "pesan_tidak_dikenali": handle_pesan_tidak_dikenali,
+}
