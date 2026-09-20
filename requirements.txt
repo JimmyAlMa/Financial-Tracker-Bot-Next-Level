@@ -1,0 +1,6 @@
+python-telegram-bot[webhooks]
+google-genai
+gspread
+google-auth
+python-dotenv
+pydantic
