@@ -347,3 +347,27 @@ FUNCTION_HANDLERS = {
     "rekap_bulanan": handle_rekap_bulanan,
     "pesan_tidak_dikenali": handle_pesan_tidak_dikenali,
 }
+
+
+# ===========================================================================
+# Telegram Handler
+# ===========================================================================
+
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text_message = update.message.text
+
+    try:
+        function_name, args = call_gemini(text_message)
+        handler = FUNCTION_HANDLERS.get(function_name)
+
+        if handler is None:
+            logger.error(f"Function tidak dikenali dari model: {function_name}")
+            reply = "Maaf, ada masalah internal. Coba lagi ya."
+        else:
+            reply = handler(args)
+
+        await update.message.reply_text(reply)
+
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        await update.message.reply_text(f"Error: {e}")
