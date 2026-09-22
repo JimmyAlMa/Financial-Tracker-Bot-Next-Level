@@ -124,8 +124,9 @@ BUAT_REMINDER_FUNC = {
 REKAP_BULANAN_FUNC = {
     "name": "rekap_bulanan",
     "description": (
-        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran bulanan. "
-        "Gunakan ini kalau user minta rekap, laporan, atau ringkasan keuangan."
+        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran satu BULAN penuh "
+        "(misal: bulan ini, bulan lalu, atau bulan tertentu). "
+        "JANGAN gunakan ini kalau user cuma minta rekap satu hari spesifik — pakai rekap_tanggal untuk itu."
     ),
     "parameters": {
         "type": "object",
@@ -146,8 +147,10 @@ REKAP_BULANAN_FUNC = {
 REKAP_TANGGAL_FUNC = {
     "name": "rekap_tanggal",
     "description": (
-        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran hari tertentu. "
-        "Gunakan ini kalau user minta rekap, laporan, atau ringkasan keuangan."
+        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran untuk SATU HARI spesifik "
+        "(misal: hari ini, kemarin, atau tanggal tertentu seperti '15 September'). "
+        "Gunakan ini kalau user sebut kata 'hari ini', 'kemarin', 'tadi', atau tanggal spesifik. "
+        "JANGAN gunakan ini kalau user minta rekap satu bulan penuh — pakai rekap_bulanan untuk itu."
     ),
     "parameters": {
         "type": "object",
