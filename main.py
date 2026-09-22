@@ -139,6 +139,32 @@ REKAP_BULANAN_FUNC = {
     },
 }
 
+REKAP_TANGGAL_FUNC = {
+    "name": "rekap_tanggal",
+    "description": (
+        "Tampilkan rekap/ringkasan pemasukan dan pengeluaran hari tertentu. "
+        "Gunakan ini kalau user minta rekap, laporan, atau ringkasan keuangan."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "hari": {
+                "type": "integer",
+                "description": "Tanggal yang mau di rekap (1-31, tergantung bulan). Kosongkan kalau user tidak sebut.",
+            }, 
+            "bulan": {
+                "type": "integer",
+                "description": "Bulan yang mau direkap (1-12). Kosongkan kalau user tidak sebut."
+            },
+            "tahun": {
+                "type": "integer",
+                "description": "Tahun yang mau direkap. Kosongkan kalau user tidak sebut."
+            }
+        },
+        "required": [],
+    }
+}
+
 PESAN_TIDAK_DIKENALI_FUNC = {
     "name": "pesan_tidak_dikenali",
     "description": (
