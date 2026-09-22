@@ -52,6 +52,10 @@ class RekapParams(BaseModel):
     bulan: Optional[int] = Field(default=None, ge=1, le=12)
     tahun: Optional[int] = Field(default=None, ge=2000, le=2100)
 
+class RekapHariTertentu(BaseModel):
+    hari: Optional[int] = Field(default=None, gt=0, le=31)
+    bulan: Optional[int] = Field(default=None, ge=1, le=12)
+    tahun: Optional[int] = Field(default=None, ge=2000, le=2100)
 
 # ===========================================================================
 # Function Declarations
