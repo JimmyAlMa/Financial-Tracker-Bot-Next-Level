@@ -431,7 +431,7 @@ def handle_rekap_tanggal_tertentu(args: dict) -> str:
 
 def handle_pesan_tidak_dikenali(args: dict) -> str:
     return (
-        "Maaf, aku cuma bisa bantu catat transaksi, bikin reminder, atau rekap bulanan. "
+        "Maaf, aku cuma bisa bantu catat transaksi, bikin reminder, rekap bulanan, atau rekap tanggal tertentu. "
         "Coba tulis ulang, misalnya: 'makan siang 25rb' atau 'rekap bulan ini'"
     )
 
