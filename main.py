@@ -440,6 +440,7 @@ FUNCTION_HANDLERS = {
     "buat_reminder": handle_buat_reminder,
     "rekap_bulanan": handle_rekap_bulanan,
     "pesan_tidak_dikenali": handle_pesan_tidak_dikenali,
+    "rekap_tanggal": handle_rekap_tanggal_tertentu
 }
 
 
