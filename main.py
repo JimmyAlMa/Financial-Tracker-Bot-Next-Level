@@ -347,7 +347,8 @@ def handle_rekap_bulanan(args: dict) -> str:
         tipe, nominal_str = row[1], row[3]
 
         try:
-            nominal = float(nominal_str)
+            nominal_bersih = nominal_str.replace("Rp", "").replace(",","").strip()
+            nominal = float(nominal_bersih)
         except ValueError:
             continue
 
@@ -406,7 +407,8 @@ def handle_rekap_tanggal_tertentu(args: dict) -> str:
         tipe, nominal_str = row[1], row[3]
 
         try:
-            nominal = float(nominal_str)
+            nominal_bersih = nominal_str.replace("Rp","").replace(",","").strip()
+            nominal = float(nominal_bersih)
         except ValueError:
             continue
 
