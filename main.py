@@ -12,7 +12,7 @@ from google.genai import types
 import gspread
 from google.oauth2.service_account import Credentials
 from telegram import Update
-from telegram.ext import Application, ContextTypes, MessageHandler, filters
+from telegram.ext import Application, ContextTypes, MessageHandler, CommandHandler, filters
 
 load_dotenv()
 
