@@ -469,6 +469,21 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         logger.error(f"Error: {e}")
         await update.message.reply_text(f"Error: {e}")
 
+async def handle_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    teks_bantuan = (
+        "Halo! Aku bot pencatat keuangan pribadi. Ini yang bisa aku bantu:\n\n"
+        "💰 Catat transaksi\n"
+        "Contoh: 'makan siang 25rb', 'gajian 5jt'\n\n"
+        "⏰ Bikin reminder\n"
+        "Contoh: 'ingetin bayar listrik tanggal 20'\n\n"
+        "📊 Rekap bulanan\n"
+        "Contoh: 'rekap bulan ini', 'rekap Agustus'\n\n"
+        "📅 Rekap tanggal tertentu\n"
+        "Contoh: 'rekap hari ini', 'rekap kemarin'\n\n"
+        "Tinggal chat pakai bahasa biasa, aku yang bakal ngerti maksudnya!"
+    )
+    await update.message.reply_text(teks_bantuan)
+
 def main():
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
